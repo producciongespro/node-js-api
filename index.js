@@ -1,7 +1,6 @@
 const express = require("express");
 const morgan = require ("morgan");
 const app = express();
-const port = 35000;
 
 /** Lista de usuarios de prueba con usuario base */
 var usuarios = [
@@ -11,6 +10,12 @@ var usuarios = [
     correo: "jime@correo.de",
   },
 ];
+
+/** Settings (configuración del servidor) */
+app.set('appName', 'API Node JS');
+app.set('port', 3500);
+/*** ************************************************* */
+
 
 const logger=(req, res, next)=> {
     //función midleware de peticiones
@@ -41,10 +46,13 @@ app.all("/usuarios", (req, res, next)=> {
 
 
 //************ GET **********************
-app.get("/", (req, res) => {
-    /** Root de API */
+
+/*
+app.get("/", (req, res) => {  
   res.send("<h1> API Node js </h1>");
 });
+
+*/
 
 app.get("/acerca", (req, res) => {
     /** Vista acerca de  */
@@ -82,10 +90,12 @@ app.post("/usuario", (req, res) => {
 
 // -----------
 
+/** Midleware para servir archivos estáticos (HTML) */
+app.use( express.static('public') );
+
+
+
 /// Métodos utilitarios
-
-
-
 const agregarUsuario = (usr) => {
   console.log("usuario recibido:", usr);
   usuarios.push(usr);
@@ -102,6 +112,7 @@ const usuarioPorId = (id) => {
   return tmpUsr;
 };
 
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+app.listen( app.get('port'), () => {
+  console.log(`Servidor escuchando en http://localhost:${ app.get('port')  }`);
+  console.log(`Nombre de la aplicación: ${app.get('appName')} `)  ;
 });
