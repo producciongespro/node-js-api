@@ -11,8 +11,19 @@ var usuarios = [
   },
 ];
 
+const logger=(req, res, next)=> {
+    //función midleware de peticiones
+    //Procesar datos para validar.
+    // a diferencia de "app.all" esta valida todas las peticiones del cliente, incluyendo el home y "acerca" por ejemplo
+    console.log("Petición recibida");
+    // esto es una Template String
+    console.log(`Ruta recibida desde ${req.protocol}, en el host ${req.get('host')} y la ruta: ${req.originalUrl}` );
+    next();
+}
+
 //---- Midleware
 app.use(express.json());
+app.use(logger );
 
 /*******   VALIDACIÓN DE REQ */
 
@@ -59,7 +70,8 @@ app.post("/usuario", (req, res) => {
 
   const resp = {
     isOk: true,
-    msj: "Usuario " + usuario.nombre + " recibido de forma satisfactoria.",
+    // esto es una Template String: cadenas avanzadas en EMACscript 6:
+    msj: `Usuario ${usuario.nombre} recibido de forma satisfactoria.`,
   };
   res.json(resp);
 });
@@ -67,6 +79,8 @@ app.post("/usuario", (req, res) => {
 // -----------
 
 /// Métodos utilitarios
+
+
 
 const agregarUsuario = (usr) => {
   console.log("usuario recibido:", usr);
