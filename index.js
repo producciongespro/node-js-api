@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require ("morgan");
 const app = express();
 const port = 35000;
 
@@ -23,7 +24,10 @@ const logger=(req, res, next)=> {
 
 //---- Midleware
 app.use(express.json());
-app.use(logger );
+//logger pesonalizado:
+//app.use(logger );
+//logger morgan
+app.use(morgan ('common'));
 
 /*******   VALIDACIÓN DE REQ */
 
