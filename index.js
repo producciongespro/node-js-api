@@ -14,8 +14,18 @@ var usuarios = [
 //---- Midleware
 app.use(express.json());
 
+/*******   VALIDACIÓN DE REQ */
+
+app.all("/usuarios", (req, res, next)=> {
+    console.log("Prevista para validar datos del cliente");
+    next();
+})
+
+
 // ------------ Enrutamiento:
-//************ GET
+
+
+//************ GET **********************
 app.get("/", (req, res) => {
     /** Root de API */
   res.send("<h1> API Node js </h1>");
@@ -40,7 +50,7 @@ app.get("/usuario/:id", (req, res) => {
   res.json(usuarioPorId(params.id));
 });
 
-// ************ POST
+// ************ POST ****************************
 
 app.post("/usuario", (req, res) => {
     /** Se agera un usuario a la lista */
@@ -68,7 +78,7 @@ const usuarioPorId = (id) => {
   let tmpUsr = null;
   var index = usuarios.findIndex((obj) => obj.id === id);
   console.log(index);
-  if (index >= 0) {
+  if (index > -1) {
     tmpUsr = usuarios[index];
   }
   return tmpUsr;
