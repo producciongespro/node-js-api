@@ -1,19 +1,14 @@
 const express = require("express");
 const morgan = require ("morgan");
+const estudiantes= require('./data/estudiantes.json');
 const app = express();
 
-/** Lista de usuarios de prueba con usuario base */
-var usuarios = [
-  {
-    id: "456",
-    nombre: "Jimena",
-    correo: "jime@correo.de",
-  },
-];
+
+
 
 /** Settings (configuración del servidor) */
 app.set('appName', 'API Node JS');
-app.set('port', 3500);
+app.set('port', process.env.PORT || 35000);
 /*** ************************************************* */
 
 
@@ -36,7 +31,7 @@ app.use(morgan ('common'));
 
 /*******   VALIDACIÓN DE REQ */
 
-app.all("/usuarios", (req, res, next)=> {
+app.all("/estudiantes", (req, res, next)=> {
     console.log("Prevista para validar datos del cliente");
     next();
 })
@@ -59,31 +54,31 @@ app.get("/acerca", (req, res) => {
   res.send("<h1> About me... </h1>");
 });
 
-app.get("/usuarios", (req, res) => {
+app.get("/estudiantes", (req, res) => {
     /** Obtiene lista de usuarios en formato json */
-  res.json(usuarios);
+  res.json(estudiantes);
 });
 
-app.get("/usuario/:id", (req, res) => {
+app.get("/estudiante/:id", (req, res) => {
     /** Obtiene el usuario mediante parametro de us id 
      * ejemplo: http://localhost:35000/usuario/456
     */
   const params = req.params;
   console.log("params",params);
-  res.json(usuarioPorId(params.id));
+  res.json(usuarioPorId(params.id, estudiantes ));
 });
 
 // ************ POST ****************************
 
-app.post("/usuario", (req, res) => {
+app.post("/estudiante", (req, res) => {
     /** Se agera un usuario a la lista */
-  const usuario = req.body;
-  agregarUsuario(usuario);
+  const item = req.body;
+  agregarRegistro(item, estudiantes );
 
   const resp = {
     isOk: true,
     // esto es una Template String: cadenas avanzadas en EMACscript 6:
-    msj: `Usuario ${usuario.nombre} recibido de forma satisfactoria.`,
+    msj: `Usuario ${item.nombre} recibido de forma satisfactoria.`,
   };
   res.json(resp);
 });
@@ -96,20 +91,20 @@ app.use( express.static('public') );
 
 
 /// Métodos utilitarios
-const agregarUsuario = (usr) => {
-  console.log("usuario recibido:", usr);
-  usuarios.push(usr);
+const agregarRegistro = (item, array ) => {
+  console.log("usuario recibido:", item);
+  array.push(item);
 };
 
-const usuarioPorId = (id) => {
+const usuarioPorId = (id, array ) => {
   console.log("id recibido", id);
-  let tmpUsr = null;
-  var index = usuarios.findIndex((obj) => obj.id === id);
+  let tmpItem = null;
+  var index = array.findIndex((obj) => obj.id === id);
   console.log(index);
   if (index > -1) {
-    tmpUsr = usuarios[index];
+    tmpItem = array[index];
   }
-  return tmpUsr;
+  return tmpItem;
 };
 
 app.listen( app.get('port'), () => {
