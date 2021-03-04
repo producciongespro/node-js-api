@@ -12,12 +12,12 @@ app.set("port", process.env.PORT || 35000);
 //---- Midleware
 app.use(express.json());
 //logger morgan
-app.use(morgan("common"));
+//app.use(morgan("common"));
 
 /*******   VALIDACIÓN DE REQ */
 
 app.all("/api/estudiantes", (req, res, next) => {
-  console.log("Prevista para validar datos del cliente");
+  //console.log("Prevista para validar datos del cliente");
   next();
 });
 

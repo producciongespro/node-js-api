@@ -1,11 +1,11 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "nombre": "Jimena",
         "correo": "jime@correo.de"
       },
       {
-        "id": "2",
+        "id": 2,
         "nombre": "Pepito",
         "correo": "pepito@correo.de"
       }
