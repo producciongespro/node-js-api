@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+
+    <button onclick="obtener()"  >GET</button>
+    
+</body>
+
+<script>
+const URL_API = "http://localhost:35000/api/estudiantes";
+const obtener=()=> {
+    console.log("obtener");
+    fetch(URL_API)
+    .then (resp=> resp.json())
+    .then(json=>{
+        console.log(json);
+    })
+}
+
+</script>
+</html>
