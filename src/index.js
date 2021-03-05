@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -8,6 +9,15 @@ const app = express();
 app.set("appName", "API Node JS");
 app.set("port", process.env.PORT || 35000);
 /*** ************************************************* */
+
+/** Conexión BD */
+mongoose.connect ('mongodb://localhost/crud-estudiantes')
+.then (bd=> {
+  console.log("Base de datos conectada");
+})
+.catch ( err=> console.log("Error", err));
+
+
 
 //---- Midleware
 app.use(express.json());
