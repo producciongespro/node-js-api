@@ -1,44 +1,6 @@
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-
-const app = express();
-
-/** Settings (configuración del servidor) */
-app.set("appName", "API Node JS");
-app.set("port", process.env.PORT || 35000);
-/*** ************************************************* */
-
-/** Conexión BD */
-mongoose.connect ('mongodb://localhost/crud-estudiantes')
-.then (bd=> {
-  console.log("Base de datos conectada");
-})
-.catch ( err=> console.log("Error", err));
-
-
-
-//---- Midleware
-app.use(express.json());
-//logger morgan
-app.use(morgan("common"));
-//CORS
-app.use(cors());
-
-/*******   VALIDACIÓN DE REQ */
-
-app.all("/api/estudiantes", (req, res, next) => {
-  //console.log("Prevista para validar datos del cliente");
-  next();
-});
-
-// ------------ Enrutamiento:
-
-app.use("/api/estudiantes", require("./routes/estudiantes"));
-
-/** Midleware para servir archivos estáticos (HTML) */
-app.use(express.static("public"));
+//Este script solo incia la aplicación del servidor:
+import app from './app';
+import './database';
 
 app.listen(app.get("port"), () => {
   console.log(`Servidor escuchando en http://localhost:${app.get("port")}`);
