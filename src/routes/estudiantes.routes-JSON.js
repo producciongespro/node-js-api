@@ -4,9 +4,6 @@ const router = Router();
 const usuarioPorId = require("../utils/busquedas");
 const { agregarObjeto, eliminarObjeto } = require("../utils/crud");
 var estudiantes = require("../data/estudiantes.json");
-
-import Estudiante from "../models/Estudiante";
-
 /** Se agera un usuario a la lista */
 // respuesta que se le va enviar al cliente:
 const resp = { isOk: null, msj: null };
@@ -27,19 +24,17 @@ router.get("/:id", (req, res) => {
   res.json(usuarioPorId(params.id, estudiantes));
 });
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   //Se extraen las propiedades para luego verificar su valor:
   const { nombre, correo } = req.body;
   //validacion de datos requeridos
   // Se recomienda usar módiulo "express validator" para estos casos:
   if (nombre && correo) {
-    const nuevoEstudiante = new Estudiante({ nombre: nombre, correo: correo });
-    await nuevoEstudiante.save();
-    console.log(nuevoEstudiante);
-
-    if (nuevoEstudiante) {
+    //Se hace una copia del objeto req.body y se envia como parametro en ela funcion
+    const item = agregarObjeto({ ...req.body }, estudiantes);
+    if (item) {
       resp.isOk = true;
-      resp.msj = `Usuario ${nuevoEstudiante.nombre} con el id ${nuevoEstudiante._id} recibido de forma satisfactoria. 🔥`;
+      resp.msj = `Usuario ${item.nombre} con el id ${item.id} recibido de forma satisfactoria. 🔥`;
       status = 200;
     } else {
       resp.isOk = false;

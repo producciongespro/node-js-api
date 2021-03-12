@@ -1,0 +1,12 @@
+//cliente para hacer peticiones al servidor
+//complemento rest client
+GET http://localhost:35000/api/estudiantes
+
+###
+POST http://localhost:35000/api/estudiantes
+Content-Type: application/json
+
+{
+    "nombre": "Lolita",
+    "correo": "lolita@correo.de"    
+}
