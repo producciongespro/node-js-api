@@ -7,10 +7,24 @@ POST http://localhost:35000/api/estudiantes
 Content-Type: application/json
 
 {
-    "nombre": "Luis Ch Campos",
-    "correo": "luis@correo.de"    
+    "nombre": "Jimena Mora",
+    "correo": "jime@correo.de",
+    "activo": true
 }
 
 ###
-GET http://localhost:35000/api/estudiantes/60521b050b609f2f9c9fca02
+GET http://localhost:35000/api/estudiantes/605244d14d51c30d94d81a88
 
+###
+DELETE  http://localhost:35000/api/estudiantes/60521b050b609f2f9c9fca02
+
+###
+GET http://localhost:35000/api/estudiantes/activos
+
+###
+PUT   http://localhost:35000/api/estudiantes/605244d14d51c30d94d81a88
+Content-Type: application/json
+
+{   
+    "correo": "jime258@correo.de"    
+}

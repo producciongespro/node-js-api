@@ -9,7 +9,7 @@ const estudianteSchema = new Schema({
   correo: String,
   activo: {
     type: Boolean,
-    default: true,
+    default: false,
   }
 }, {
   versionKey: false,
