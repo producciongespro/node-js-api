@@ -7,6 +7,10 @@ POST http://localhost:35000/api/estudiantes
 Content-Type: application/json
 
 {
-    "nombre": "Lolita",
-    "correo": "lolita@correo.de"    
+    "nombre": "Luis Ch Campos",
+    "correo": "luis@correo.de"    
 }
+
+###
+GET http://localhost:35000/api/estudiantes/60521b050b609f2f9c9fca02
+
