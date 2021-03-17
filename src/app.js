@@ -7,12 +7,11 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 👇 */
 import express from "express";
-import cors from 'cors';
-import morgan from 'morgan';
+import cors from "cors";
+import morgan from "morgan";
 
 //Rutas:
-import estudiantesRoutes from './routes/estudiantes.routes';
-
+import estudiantesRoutes from "./routes/estudiantes.routes";
 
 const app = express();
 
@@ -20,8 +19,6 @@ const app = express();
 app.set("appName", "API Node JS");
 app.set("port", process.env.PORT || 35000);
 /*** ************************************************* */
-
-
 
 //---- Midleware
 app.use(express.json());
@@ -39,7 +36,7 @@ app.all("/api/estudiantes", (req, res, next) => {
 
 // ------------ Enrutamiento:
 
-app.use("/api/estudiantes", estudiantesRoutes );
+app.use("/api/estudiantes", estudiantesRoutes);
 
 /** Midleware para servir archivos estáticos (HTML) */
 app.use(express.static("public"));

@@ -3,6 +3,8 @@ import { Router } from "express";
 import * as estCtr from '../controllers/estudiantes.controller';
 const router = Router();
 
+//Se recomienda instala API DOCS js para la documentación.
+
 
 router.get("/", estCtr.obtener );
 

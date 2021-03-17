@@ -5,6 +5,10 @@ const resp = { isOk: false, msj: "Problemas en el servidor" };
 //Estado del serrvidor:
 var status = 400;
 
+//NOTA. PAra las validaciones se recomienda el módulo express validator
+
+
+
 export const obtener = async (req, res) => {
   const estudiantes = await Estudiante.find();
   res.json(estudiantes);
@@ -32,9 +36,13 @@ export const insertar = async (req, res) => {
       correo: correo,
       activo: activo ? activo : false,
     });
-    const estudianteGuardado = await nuevoEstudiante.save();
-    //console.log(nuevoEstudiante);
-
+    let estudianteGuardado;
+    try {
+      estudianteGuardado = await nuevoEstudiante.save();
+    } catch (error) {
+      resp.msj= error
+    }
+    
     if (nuevoEstudiante) {
       resp.isOk = true;
       resp.msj = `Usuario ${estudianteGuardado.nombre} con el id ${estudianteGuardado._id} alamcenado de forma satisfactoria. 🔥`;
@@ -76,7 +84,9 @@ export const actuAlizar = async (req, res) => {
 
   console.log("ID---->>>>", id, "///ITEM--->>>", item);
   
-  actualizado = await Estudiante.findByIdAndUpdate(id, item);
+  //{useFindAndModify:false} propiedad de actuaqlizaicón de mongoose
+
+  actualizado = await Estudiante.findByIdAndUpdate(id, item, {useFindAndModify:false} );
   if (actualizado) {
     resp.isOk = true;
     resp.msj = `Documento actualizado de forma satisfacotira`;

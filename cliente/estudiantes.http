@@ -7,8 +7,8 @@ POST http://localhost:35000/api/estudiantes
 Content-Type: application/json
 
 {
-    "nombre": "Jimena Mora",
-    "correo": "jime@correo.de",
+    "nombre": "Toño Coto",
+    "correo": "toño@correo.de",
     "activo": true
 }
 
@@ -26,5 +26,6 @@ PUT   http://localhost:35000/api/estudiantes/605244d14d51c30d94d81a88
 Content-Type: application/json
 
 {   
-    "correo": "jime258@correo.de"    
+    "nombre": "Jimena Lorena",
+    "activo": false
 }
