@@ -26,7 +26,7 @@ export const obtenerPorId = async (req, res) => {
 
 export const insertar = async (req, res) => {
   //Se extraen las propiedades para luego verificar su valor:
-  const { nombre, correo, activo } = req.body;
+  const { nombre, correo, activo, materias } = req.body;
   //validacion de datos requeridos
   // Se recomienda usar módiulo "express validator" para estos casos:
   if (nombre && correo) {
@@ -35,6 +35,7 @@ export const insertar = async (req, res) => {
       nombre: nombre,
       correo: correo,
       activo: activo ? activo : false,
+      materias: materias && materias
     });
     let estudianteGuardado;
     try {

@@ -10,7 +10,8 @@ const estudianteSchema = new Schema({
   activo: {
     type: Boolean,
     default: false,
-  }
+  },
+  materias: Array
 }, {
   versionKey: false,
   timestamps: false
