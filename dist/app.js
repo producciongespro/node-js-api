@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12,8 +14,6 @@ var _cors = _interopRequireDefault(require("cors"));
 var _morgan = _interopRequireDefault(require("morgan"));
 
 var _estudiantes = _interopRequireDefault(require("./routes/estudiantes.routes"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 //Este script tiene la configuración del servidor (express)
 
