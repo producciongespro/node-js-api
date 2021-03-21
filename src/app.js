@@ -17,7 +17,7 @@ const app = express();
 
 /** Settings (configuración del servidor) */
 app.set("appName", "API Node JS");
-app.set("port", process.env.PORT || 35000);
+app.set("port", process.env.PORT || 80);
 /*** ************************************************* */
 
 //---- Midleware
