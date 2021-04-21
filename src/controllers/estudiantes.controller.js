@@ -34,7 +34,7 @@ export const insertar = async (req, res) => {
     const nuevoEstudiante = new Estudiante({
       nombre: nombre,
       correo: correo,
-      activo: activo ? activo : false,
+      //activo: activo ? activo : false,
       materias: materias && materias
     });
     let estudianteGuardado;

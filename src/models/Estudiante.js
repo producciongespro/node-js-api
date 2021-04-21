@@ -11,7 +11,14 @@ const estudianteSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  materias: Array
+  materias: [
+    {
+      nota: Number,
+      nombre: String,
+      comentario: String
+    }
+  ]    
+  
 }, {
   versionKey: false,
   timestamps: false

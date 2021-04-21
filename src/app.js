@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import fileUpload from "express-fileupload";
 
 //Rutas:
 import estudiantesRoutes from "./routes/estudiantes.routes";
@@ -26,6 +27,10 @@ app.use(express.json());
 app.use(morgan("common"));
 //CORS
 app.use(cors());
+//subida de archivos:
+app.use(fileUpload({
+  createParentPath:true
+}))
 
 /*******   VALIDACIÓN DE REQ */
 
